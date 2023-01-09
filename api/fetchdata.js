@@ -1,36 +1,27 @@
 import { useState, useEffect } from "react";
 
-const FetchApiData = (apiUrl) => {
-    const [data, setData] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+const usePast7DaysData = (apiUrl) => {
+    const [past7DaysData, setPast7DaysData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true);
-
-            try {
-                const response = await fetch(apiUrl);
+            const currentDate = new Date();
+            const past7DaysData = [];
+            for (let i = 0; i < 7; i++) {
+                const date = currentDate.toISOString().slice(0, 10);
+                const response = await fetch(`${apiUrl}${date}`);
                 const data = await response.json();
-                setData(data["jobs"]);
-            } catch (error) {
-                setError(error);
+                past7DaysData.push(data["jobs"]);
+                currentDate.setDate(currentDate.getDate() - 1);
             }
-
+            setPast7DaysData(past7DaysData);
             setIsLoading(false);
         };
-
         fetchData();
     }, [apiUrl]);
 
-    return { data, isLoading, error };
+    return { past7DaysData, isLoading };
 };
 
-const GetDataByDate = (date) => {
-    const apiUrl = "http://192.168.0.22:8888/jobs/" + date;
-    const { data, isLoading, error } = FetchApiData(apiUrl);
-
-    return { data, isLoading, error };
-};
-
-export default GetDataByDate;
+export default usePast7DaysData;

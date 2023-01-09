@@ -1,31 +1,31 @@
 import React from "react";
-import { useMemo } from "react";
 
 import DataTable from "./table.js";
-import GetDataByDate from "api/fetchdata";
+import usePast7DaysData from "api/fetchdata";
 
-const DisplayTable = () => {
-    const { data, isLoading, error } = GetDataByDate("2023-01-05"); // TODO: replace with filter date
-    const memoizedData = useMemo(() => data, [data]);
+const DisplayTable = ({ config }) => {
+    const { past7DaysData, isLoading } = usePast7DaysData(config["API_URL"]);
 
-    if (error) return <div>Error: {error.message}</div>; // TODO: replace with error message
-    if (memoizedData)
+    if (past7DaysData) {
+        const data = Object.values(past7DaysData)
+            .flat()
+            .filter((el) => {
+                return el !== null && el !== undefined;
+            });
         return (
             <div
                 style={{
-                    width: "70%",
+                    width: "80%",
                     margin: "auto",
                     alignItems: "center",
                     justifyContent: "center",
                     marginTop: "2rem",
                 }}
             >
-                <DataTable
-                    data={memoizedData}
-                    state={{ isLoading: isLoading }}
-                />
+                <DataTable data={data} state={isLoading} />
             </div>
         );
+    }
 };
 
 export default DisplayTable;

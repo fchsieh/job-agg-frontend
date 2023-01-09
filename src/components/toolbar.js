@@ -5,7 +5,7 @@ const Topbar = () => {
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                     Job Agg
                 </Typography>
             </Toolbar>
