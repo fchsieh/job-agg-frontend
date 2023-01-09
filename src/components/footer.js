@@ -1,28 +1,25 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
 import { Paper, Typography, Link } from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(1, 2),
-        marginTop: "0.5rem",
-        position: "fixed",
-        left: 0,
-        bottom: 0,
-        width: "100%",
-        backgroundColor: "#f5f5f5",
-    },
-}));
-
 export default function Footer() {
-    const classes = useStyles();
-
     return (
-        <Paper className={classes.root}>
+        <Paper
+            sx={{
+                padding: "8px 16px",
+                marginTop: "0.5rem",
+                position: "fixed",
+                left: 0,
+                bottom: 0,
+                width: "100%",
+                backgroundColor: "#f5f5f5",
+            }}
+        >
             <Typography variant="body2" align="center" color="textSecondary">
                 Made with{" "}
                 <Typography display="inline" color="red">
-                    ❤️
+                    <span role="img" aria-label="Love">
+                        ❤️
+                    </span>
                 </Typography>{" "}
                 by{" "}
                 <Link

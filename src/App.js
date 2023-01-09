@@ -1,9 +1,13 @@
+import React from "react";
+
 import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Topbar from "./components/toolbar.js";
 import Description from "./components/description.js";
 import DisplayTable from "./components/data.js";
 import Footer from "./components/footer.js";
+
+import API from "./api.json";
 
 const topbarTheme = createTheme({
     typography: {
@@ -18,10 +22,6 @@ const webTheme = createTheme({
 });
 
 function App() {
-    const config = {
-        API_URL: "http://192.168.0.22:8888/jobs/",
-    };
-
     return (
         <div className="App">
             <ThemeProvider theme={topbarTheme}>
@@ -29,7 +29,7 @@ function App() {
             </ThemeProvider>
             <ThemeProvider theme={webTheme}>
                 <Description />
-                <DisplayTable config={config} />
+                <DisplayTable API={API} />
                 <Footer />
             </ThemeProvider>
         </div>

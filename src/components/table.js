@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Box, Typography, Link } from "@mui/material";
 import MaterialReactTable from "material-react-table";
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, isLoading }) => {
     const columns = useMemo(
         () => [
             {
@@ -54,7 +54,7 @@ const DataTable = ({ data }) => {
         <div>
             <MaterialReactTable
                 columns={columns}
-                data={data}
+                data={data ? data : []}
                 enableRowNumbers
                 rowNumberMode="static"
                 enableStickyHeader
@@ -73,6 +73,7 @@ const DataTable = ({ data }) => {
                         fontSize: "17px",
                     },
                 }}
+                state={{ isLoading: isLoading }}
             />
         </div>
     );
