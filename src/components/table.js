@@ -9,7 +9,7 @@ const DataTable = ({ data, isLoading }) => {
             {
                 header: "Company",
                 accessorKey: "company_name",
-                size: 50,
+                filterFn: "contains",
                 Cell: ({ cell, row }) => {
                     let link = row.original.job_link;
                     return (
@@ -31,20 +31,24 @@ const DataTable = ({ data, isLoading }) => {
             {
                 header: "Job Title",
                 accessorKey: "job_title",
+                size: 220,
             },
             {
                 header: "Location",
                 accessorKey: "job_location",
+                filterFn: "contains",
+                size: 20,
             },
             {
                 header: "Source",
                 accessorKey: "source",
-                size: 50,
+                size: 20,
             },
             {
                 header: "Date Posted",
                 accessorKey: "date_posted",
-                size: 50,
+                filterFn: "contains",
+                size: 20,
             },
         ],
         []
@@ -74,6 +78,7 @@ const DataTable = ({ data, isLoading }) => {
                     },
                 }}
                 state={{ isLoading: isLoading }}
+                initialState={{ showColumnFilters: true }}
             />
         </div>
     );
