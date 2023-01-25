@@ -1,7 +1,7 @@
 import React from "react";
 
 import DataTable from "./table.js";
-import usePast7DaysData from "api/fetchdata";
+import usePast7DaysData from "../api/fetchdata";
 
 const DisplayTable = ({ API }) => {
     const { past7DaysData, isLoading } = usePast7DaysData(API["API_URL"]);
